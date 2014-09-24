@@ -1042,7 +1042,7 @@ public abstract class Server {
         if (!rpcHeaderRead) {
           //Every connection is expected to send the header.
           if (rpcHeaderBuffer == null) {
-            rpcHeaderBuffer = ByteBuffer.allocate(2);
+            rpcHeaderBuffer = ByteBuffer.allocate(1);
           }
           count = channelRead(channel, rpcHeaderBuffer);
           if (count < 0 || rpcHeaderBuffer.remaining() > 0) {
@@ -1050,7 +1050,7 @@ public abstract class Server {
           }
           int version = rpcHeaderBuffer.get(0);
           
-          byte[] method = new byte[] {rpcHeaderBuffer.get(1)};
+          // byte[] method = new byte[] {rpcHeaderBuffer.get(1)};
           
 //          authMethod = AuthMethod.read(new DataInputStream(
 //              new ByteArrayInputStream(method)));

@@ -1,14 +1,21 @@
-import conf.Configuration;
 import ipc.RPC;
+import ipc.Server;
+import conf.Configuration;
 
 
-public class Service {
+public class Service implements ServiceProtocol{
 
-    public Service() {
+    private Server server;
+    
+    public Service() {}
+    
+    public String helloWorld() {
+        return "Hello World";
     }
     
     public void start() throws Exception{
-        RPC.getServer(Service.class, this, "0.0.0.0", 3380, new Configuration());
+        this.server = RPC.getServer(Service.class, this, "127.0.0.1", 3380, new Configuration());
+        this.server.start();
     }
     
     public static void main(String[] args) throws Exception{

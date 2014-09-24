@@ -224,14 +224,16 @@ public class WritableRpcEngine implements RpcEngine {
     Object proxy = Proxy.newProxyInstance
       (protocol.getClassLoader(), new Class[] { protocol },
        new Invoker(protocol, addr, conf, factory));
-    if (proxy instanceof VersionedProtocol) {
-      long serverVersion = ((VersionedProtocol)proxy)
-        .getProtocolVersion(protocol.getName(), clientVersion);
-      if (serverVersion != clientVersion) {
-        throw new RPC.VersionMismatch(protocol.getName(), clientVersion, 
-                                      serverVersion);
-      }
-    }
+    
+//    Object proxy = Proxy.newProxyInstance
+//            (protocol.getClassLoader(), new Class[] { protocol },
+//             new InvocationHandler() {
+//
+//                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//                    return null;
+//                }
+//                
+//            });
     return proxy;
   }
 
